@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ILoveFiles</title>
+        <meta name="description" content="Convert and Compress files locally" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+
+    <body>
+        <main class="container">
+            <section id="view-home" class="view">
+                <hgroup>
+                    <h1>I Love Files</h1>
+                    <p>Convert and Compress files locally. Nothing leaves your device</p>
+                
+                </hgroup>
+
+                <button id="start-btn" role="button">Start Converting</button>
+
+                <footer class="home-footer">
+                <p>
+                 Built by <a href="https://github.com/damnitzhemanth-oss" target="_blank" rel="noopener">Hemanth</a>
+                · <a href="https://github.com/damnitzhemanth-oss/ILoveFiles" target="_blank" rel="noopener">GitHub</a>
+               </p>
+                </footer>
+            </section>
+
+        <section id="view-app" class="view" hidden>
+            <header class="app-header">
+                <button id="back-btn" class="secondary outline" aria-label="Back to Home">← Back</button>
+                <strong>I Love Files</strong>
+            </header> 
+
+            <div id="dropzone" class="dropzone">
+                <p>Drop images here or click to choose</p>
+            </div>
+
+            <p class="muted">Coming Soon</p>
+        </section>    
+        </main>
+
+        <script type="module" src="js/main.js"></script>
+    </body>
+</html>
