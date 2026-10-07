@@ -1,23 +1,40 @@
-/*Pixel themed to match YSWS pixl */
 
-:root {
+:root, [data-theme="light"] {
+    --brand: #ff3b3b;
+    --brand-dark: #c1121f;
+    --ink: #1a1a1a;
+    --bg: #f5f0e6;
+    --surface: #ffffff;
+    --muted: #6b6b6b;
+    --border: 3px;
+}
+
+
+[data-theme="dark"] {
     --brand: #ff3b3b;
     --brand-dark: #c1121f;
     --ink: #f5f5f5;
     --bg: #0d0d0d;
+    --surface: #1a1a1a;
     --muted: #8a8a8a;
-    --border: 3px;
 }
 
-body, button,input,select, textarea {
+body, button, input, select, textarea {
     font-family: 'Pixelify Sans', system-ui, sans-serif;
     letter-spacing: 0.02em;
 }
 
-h1,h2,h3, .pixel-font {
+h1, h2, h3, .pixel-font {
     font-family: 'Press Start 2P', monospace;
     letter-spacing: 0;
     line-height: 1.5;
+}
+
+body {
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    transition: background 0.15s, color 0.15s;
 }
 
 .view[hidden] {
@@ -25,14 +42,45 @@ h1,h2,h3, .pixel-font {
 }
 
 .container {
-    max-width : 640px;
+    max-width: 640px;
     margin: 0 auto;
 }
 
-/*Home*/
+
+
+#theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    background: var(--surface);
+    color: var(--ink);
+    border: var(--border) solid var(--ink);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.05s, box-shadow 0.05s;
+}
+
+#theme-toggle:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--ink);
+}
+
+#theme-toggle:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
+}
+
+
 
 #view-home {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 80vh;
@@ -41,9 +89,9 @@ h1,h2,h3, .pixel-font {
 
 #view-home h1 {
     color: var(--brand);
-    font-size: cla,p(1.6rem, 5vw, 2.4rem);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
     margin: 0 0 1rem 0;
-    text-shadow: 4px 4px 0 var(--brand-dark)
+    text-shadow: 4px 4px 0 var(--brand-dark);
 }
 
 #view-home hgroup p {
@@ -80,19 +128,19 @@ h1,h2,h3, .pixel-font {
 .home-footer {
     margin-top: 4rem;
     font-size: 1rem;
-    color:var(--muted);
+    color: var(--muted);
 }
 
 .home-footer a {
     color: var(--brand);
-    text-decoration: none;   
+    text-decoration: none;
 }
 
 .home-footer a:hover {
     text-decoration: underline;
 }
 
-/*App*/
+
 
 .app-header {
     display: flex;
@@ -126,30 +174,35 @@ h1,h2,h3, .pixel-font {
     color: var(--bg);
 }
 
+
+
 .dropzone {
     border: var(--border) dashed var(--brand);
     border-radius: 0;
     padding: 3rem 1.5rem;
     text-align: center;
     cursor: pointer;
-    background: rgba(225,59,59,0.05);
+    background: rgba(255, 59, 59, 0.05);
     transition: background 0.15s;
 }
 
+.dropzone:hover {
+    background: rgba(255, 59, 59, 0.12);
+}
+
 .dropzone p {
-    font-family: 'Pixelify Sans', sans-serif;
     font-size: 1.2rem;
-    margin:0;
+    margin: 0;
 }
 
 .muted {
     color: var(--muted);
     font-size: 1rem;
     text-align: center;
-    margin-top: 1.5rem;  
+    margin-top: 1.5rem;
 }
 
-/*Mobile*/
+/* ---------- MOBILE ---------- */
 
 @media (max-width: 480px) {
     #start-btn {
@@ -159,5 +212,12 @@ h1,h2,h3, .pixel-font {
 
     .dropzone {
         padding: 2rem 1rem;
+    }
+
+    #theme-toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 40px;
+        height: 40px;
     }
 }

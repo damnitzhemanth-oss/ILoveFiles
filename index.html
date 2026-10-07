@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,9 +10,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
         <link rel="stylesheet" href="css/style.css" />
+        <script>
+          document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';
+        </script>
     </head>
 
     <body>
+        <button id="theme-toggle" aria-label="Toggle theme">☀</button>
         <main class="container">
             <section id="view-home" class="view">
                 <hgroup>
