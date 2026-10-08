@@ -1,6 +1,9 @@
 ## I ♥ Files
 
-A local image converter and compressor that runs entirely in your browser.
+A local image converter and compressor that runs entirely in your browser. 
+URL : https://ilovefilesbyhemanth.netlify.app/
+
+![screenshot](images/screenshot1.png)
 
 ## Features
 
@@ -16,7 +19,8 @@ Using canvas API it compresses your images to the desired quality using binary s
 
 ## Architecture
 
-ILoveFiles
+```
+ ILoveFiles
 ├── .vscode
 │   └── settings.json
 ├── README.md
@@ -48,6 +52,7 @@ ILoveFiles
 │   └── zip.js
 ├── manifest.webmanifest
 └── sw.js
+```
 
 ## Privacy
 
