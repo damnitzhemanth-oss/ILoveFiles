@@ -2,6 +2,7 @@ import { state, subscribe, removeFile } from './state.js';
 import { formatBytes } from './loader.js';
 import { convertOne } from './action.js';
 import { downloadBlob } from './downloader.js';
+import { openCompare } from './compare.js';
 
 const listEl  = () => document.getElementById('file-list');
 const emptyEl = () => document.getElementById('empty-hint');
@@ -103,6 +104,13 @@ function buildActions(entry) {
         redo.textContent = 'Re-convert';
         redo.addEventListener('click', () => convertOne(entry.id));
         buttons.push(redo);
+
+        const cmp = document.createElement('button');
+        cmp.type = 'button';
+        cmp.className = 'file-btn';
+        cmp.textContent = 'Compare';
+        cmp.addEventListener('click', () => openCompare(entry.id));
+        buttons.push(cmp);
     } else {
         const convert = document.createElement('button');
         convert.type = 'button';

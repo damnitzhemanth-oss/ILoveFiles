@@ -7,6 +7,7 @@ import {setupActions} from './action.js';
 import {state} from './state.js';
 import { setupPresets } from './presets.js';
 import { setupZipButton } from './zip.js';
+import { setupCompare } from './compare.js';
 
 setupViews();
 setupTheme();
@@ -16,5 +17,6 @@ setupDropzone();
 setupActions();
 setupPresets();
 setupZipButton();
+setupCompare();
 
 console.log('I Love Files ready. State:', state);

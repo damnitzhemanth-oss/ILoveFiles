@@ -103,4 +103,23 @@
 
         <script type="module" src="js/main.js"></script>
     </body>
+
+            <div id="compare-modal" class="compare-modal" hidden>
+            <div class="compare-panel">
+                <header class="compare-header">
+                    <strong id="compare-name">Comparing</strong>
+                    <button type="button" class="file-btn" data-close aria-label="Close">×</button>
+                </header>
+
+                <div class="compare-stage">
+                    <img id="compare-original" class="compare-img" alt="Original" />
+                    <img id="compare-output" class="compare-img compare-output" alt="Converted" />
+                    <div class="compare-divider"></div>
+                </div>
+
+                <input id="compare-slider" type="range" min="0" max="100" value="50" />
+                <p class="compare-hint">Drag to compare · Original left · Converted right</p>
+            </div>
+        </div>
+        
 </html>

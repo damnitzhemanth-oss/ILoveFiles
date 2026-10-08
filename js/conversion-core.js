@@ -113,7 +113,7 @@ async function canvasToBlob(canvas, type, quality) {
     }
     return new Promise((resolve,reject) => { 
         canvas.toBlob(
-            (blob) => blob ? resolve(blob) : reeject(new Error('Encoding Failed')),type,quality
+            (blob) => blob ? resolve(blob) : reject(new Error('Encoding Failed')),type,quality
         );
     });
 }
