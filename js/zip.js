@@ -1,4 +1,4 @@
-import JSZip from './https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
 import {state} from './state.js';
 import {downloadBlob} from './downloader.js';
 
@@ -12,7 +12,7 @@ export async function downloadAllAsZip() {
     for (const entry of done) {
         let name = entry.outputName  || entry.name;
         if (used.has(name)) {
-            const dot = name.lastIndex.Of('.');
+            const dot = name.lastIndexOf('.');
             const base = dot > 0 ? name.slice(0,dot):name;
             const ext = dot > 0 ? name.slice(dot) : '';
             let i = 2;
@@ -25,7 +25,7 @@ export async function downloadAllAsZip() {
 
     const blob = await zip.generateAsync({type:'blob'});
     const stamp = new Date().toISOString().slice(0,10);
-    downloadBlob(blob, 'ilovefiles-${stamp}.zip');
+    downloadBlob(blob, `ilovefiles-${stamp}.zip`);
 }
 
 export function setupZipButton() {

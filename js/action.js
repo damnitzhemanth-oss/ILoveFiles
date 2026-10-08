@@ -39,7 +39,7 @@ export async function convertAll() {
 export function setupActions() {
     const btn = document.getElementById('convert-all-btn');
     if (!btn) return;
-    btn.addEventListener('click', () => convertAll()) }
-
+    btn.addEventListener('click', () => convertAll());
+}
 
 

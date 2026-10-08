@@ -465,10 +465,6 @@ body {
     }
 }
 
-.file-meta {
-    font-size: 0.85rem;
-    color: var(--muted);
-}
 
 .presets {
     display: flex;
@@ -501,19 +497,18 @@ body {
     border-color: var(--ink);
 }
 
-/* Dim the quality row when target size is active */
+
 .settings-row.row-disabled {
     opacity: 0.45;
     pointer-events: none;
 }
 
-/* Actions row holds two buttons now */
+
 .actions-row {
     gap: 0.5rem;
     flex-wrap: wrap;
 }
 
-/* Rename .file-size to .file-meta to match filelist.js */
 .file-meta {
     font-size: 0.85rem;
     color: var(--muted);

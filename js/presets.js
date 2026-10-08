@@ -34,14 +34,14 @@ export function setupPresets() {
         btn.textContent = preset.label;
         btn.addEventListener('click', () => {
             updateSettings(preset.settings);
-            Highlight(key);
+            highlight(key);
         });
         container.appendChild(btn);
     }
 }
 
 function highlight(activeKey) {
-    document.querySelectorAll('preset-btn').forEach((b) => {b.classList.toggle('active',b.dataset.preset === activeKey);
-
+        document.querySelectorAll('.preset-btn').forEach((b) => {b.classList.toggle('active', b.dataset.preset === activeKey);
     });
+
 }
