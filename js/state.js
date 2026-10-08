@@ -5,6 +5,9 @@ export const state = {
         quality: 0.8,
         maxWidth: 1200,
         targetBytes: null,
+        rotation: 0,
+        flipH: false,
+        flipV: false,
     },
 };
 

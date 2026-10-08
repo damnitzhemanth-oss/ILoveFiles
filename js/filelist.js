@@ -1,12 +1,14 @@
 import { state, subscribe, removeFile } from './state.js';
 import { formatBytes } from './loader.js';
 import { convertOne } from './action.js';
-import { downloadBlob } from './downloader.js';
+import { downloadBlob, copyImageToClipboard } from './downloader.js';
 import { openCompare } from './compare.js';
 
 const listEl  = () => document.getElementById('file-list');
 const emptyEl = () => document.getElementById('empty-hint');
 const appEl   = () => document.getElementById('view-app');
+
+const itemEls = new Map(); // id -> <li>
 
 export function renderFileList() {
     const list = listEl();
@@ -14,23 +16,96 @@ export function renderFileList() {
     const app = appEl();
     if (!list || !empty || !app) return;
 
-    list.innerHTML = '';
-
     const hasFiles = state.files.length > 0;
     app.classList.toggle('has-files', hasFiles);
     empty.hidden = hasFiles;
-    if (!hasFiles) return;
 
+    if (!hasFiles) {
+        list.innerHTML = '';
+        itemEls.clear();
+        return;
+    }
+
+    const seen = new Set();
+    const currentIds = state.files.map((f) => f.id);
+
+    // Add or update items in state order
+    let lastNode = null;
     for (const entry of state.files) {
-        list.appendChild(buildItem(entry));
+        seen.add(entry.id);
+        let li = itemEls.get(entry.id);
+
+        if (!li) {
+            li = buildItem(entry);
+            itemEls.set(entry.id, li);
+        } else {
+            updateItem(li, entry);
+        }
+
+        // Ensure DOM order matches state order
+        const expectedNext = lastNode ? lastNode.nextSibling : list.firstChild;
+        if (expectedNext !== li) {
+            list.insertBefore(li, expectedNext || null);
+        }
+        lastNode = li;
+    }
+
+    // Remove items no longer in state
+    for (const [id, li] of itemEls) {
+        if (!seen.has(id)) {
+            li.remove();
+            itemEls.delete(id);
+        }
     }
 }
 
+function updateItem(li, entry) {
+    li.dataset.status = entry.status || 'idle';
+    const meta = li.querySelector('.file-meta');
+    if (meta) meta.textContent = buildMetaText(entry);
+
+    const actions = li.querySelector('.file-actions');
+    if (actions) {
+        actions.innerHTML = '';
+        actions.append(...buildActions(entry));
+    }
+
+    // Re-bind keyboard handler for Enter → convert
+    li.onkeydown = makeKeyHandler(li, entry);
+}
+
+function makeKeyHandler(li, entry) {
+    return (e) => {
+        if (e.target !== li) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = li.nextElementSibling;
+            if (next) next.focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prev = li.previousElementSibling;
+            if (prev) prev.focus();
+        } else if (e.key === 'Delete' || e.key === 'Backspace') {
+            e.preventDefault();
+            removeFile(entry.id);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const convertBtn = li.querySelector('.file-btn-primary');
+            if (convertBtn) convertBtn.click();
+        }
+    };
+}
 function buildItem(entry) {
     const li = document.createElement('li');
     li.className = 'file-item';
     li.dataset.id = entry.id;
     li.dataset.status = entry.status || 'idle';
+
+    li.tabIndex = 0;
+    li.setAttribute('role', 'listitem');
+    li.tabIndex = 0;
+    li.setAttribute('role', 'listitem');
+    li.onkeydown = makeKeyHandler(li, entry);
 
     const thumb = document.createElement('img');
     thumb.className = 'file-thumb';
@@ -72,7 +147,7 @@ function buildMetaText(entry) {
         const dims = entry.outputWidth && entry.outputHeight
             ? ` · ${entry.outputWidth}×${entry.outputHeight}`
             : '';
-        return `${orig} → ${out} (${label})${dims}`;
+        return `${orig} → ${out} (${label})${dims} · metadata stripped`;
     }
 
     return orig;
@@ -111,6 +186,26 @@ function buildActions(entry) {
         cmp.textContent = 'Compare';
         cmp.addEventListener('click', () => openCompare(entry.id));
         buttons.push(cmp);
+
+        const copy = document.createElement('button');
+        copy.type = 'button';
+        copy.className = 'file-btn';
+        copy.textContent = 'Copy';
+        copy.addEventListener('click', async () => {
+        const original = copy.textContent;
+        copy.disabled = true;
+        copy.textContent = 'Copying…';
+        try {
+            await copyImageToClipboard(entry.outputBlob);
+            copy.textContent = 'Copied!';
+            setTimeout(() => { copy.textContent = original; copy.disabled = false; }, 1200);
+        } catch (err) {
+            console.error(err);
+            copy.textContent = 'Failed';
+            setTimeout(() => { copy.textContent = original; copy.disabled = false; }, 1200);
+        }
+        });
+        buttons.push(copy);
     } else {
         const convert = document.createElement('button');
         convert.type = 'button';

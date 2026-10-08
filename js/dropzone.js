@@ -6,14 +6,20 @@ export function setupDropzone() {
     const input = document.getElementById('file-input');
     if (!zone || !input) return;
 
-    // Click to browse
     zone.addEventListener('click', () => input.click());
     input.addEventListener('change', () => {
         acceptFiles(input.files);
-        input.value = ''; // reset so the same file can be picked again
+        input.value = ''; 
     });
 
-    // Drag highlight
+    zone.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            input.click();
+        }
+    });
+
+   
     zone.addEventListener('dragover', (e) => {
         e.preventDefault();
         zone.classList.add('dragover');
@@ -27,7 +33,7 @@ export function setupDropzone() {
         acceptFiles(e.dataTransfer.files);
     });
 
-    // Stop the browser from opening files dropped anywhere else
+    
     window.addEventListener('dragover', (e) => e.preventDefault());
     window.addEventListener('drop',     (e) => e.preventDefault());
 }

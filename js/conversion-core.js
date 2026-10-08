@@ -14,7 +14,8 @@ export async function convertCore(file, settings, originalName) {
         const { canvas, width, height } = drawResized(
             bitmap,
             settings.maxWidth,
-            settings.type === 'image/jpeg'
+            settings.type === 'image/jpeg',
+            settings
         );
 
         const blob = await canvasToBlob(canvas, settings.type, settings.quality);
@@ -40,7 +41,8 @@ async function compressToTarget(bitmap, settings) {
         const {canvas, width: w, height: h} = drawResized (
           bitmap,
           width,
-          settings.type === 'image/jpeg'
+          settings.type === 'image/jpeg',
+          settings
         );
 
         let lo = 0.1, hi = 0.95, found = null;
@@ -70,29 +72,48 @@ async function compressToTarget(bitmap, settings) {
     return best;
 }
 
-function drawResized(bitmap,maxWidth,fillWhite) {
-    let w = bitmap.width;
-    let h = bitmap.height;
+function drawResized(bitmap, maxWidth, fillWhite, transform = {}) {
+    const rotation = transform.rotation || 0;
+    const flipH = !!transform.flipH;
+    const flipV = !!transform.flipV;
+
+    const srcW = bitmap.width;
+    const srcH = bitmap.height;
+    const rotated = rotation === 90 || rotation === 270;
+
+    const baseW = rotated ? srcH : srcW;
+    const baseH = rotated ? srcW : srcH;
+
+    let w = baseW;
+    let h = baseH;
 
     if (maxWidth && w > maxWidth) {
-        h = Math.round(h*(maxWidth/w));
+        h = Math.round(h * (maxWidth / w));
         w = maxWidth;
     }
 
-    const canvas = createCanvas (w,h);
+    const canvas = createCanvas(w, h);
     const ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
     if (fillWhite) {
-        ctx.fillStyle ='#ffffff';
-        ctx.fillRect(0,0,w,h);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
     }
 
-    ctx.drawImage(bitmap,0,0,w,h);
-    return {canvas,width:w,height:h};
-}
+    ctx.save();
+    ctx.translate(w / 2, h / 2);
+    ctx.rotate((rotation * Math.PI) / 180);
+    ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
 
+    const drawW = rotated ? h : w;
+    const drawH = rotated ? w : h;
+    ctx.drawImage(bitmap, -drawW / 2, -drawH / 2, drawW, drawH);
+    ctx.restore();
+
+    return { canvas, width: w, height: h };
+}
 function createCanvas(w,h) {
     if (typeof OffscreenCanvas !== 'undefined') {
         return new OffscreenCanvas(w, h);

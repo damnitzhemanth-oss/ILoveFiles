@@ -1,4 +1,5 @@
 import { state, updateSettings, subscribe } from './state.js';
+import {detectFormats} from './format-support.js'
 
 export function setupSettings() {
     const formatSel  = document.getElementById('setting-format');
@@ -9,6 +10,12 @@ export function setupSettings() {
     const qualityRow = document.getElementById('quality-row');
 
     if (!formatSel) return;
+
+    detectFormats().then((formats) => {
+    if (formats.avif) {
+        document.getElementById('option-avif').hidden = false;
+        }
+    });
 
     
     formatSel.addEventListener('change', () => {
@@ -29,6 +36,22 @@ export function setupSettings() {
         updateSettings({ targetBytes: kb > 0 ? Math.round(kb * 1024) : null });
     });
 
+    const rotateBtn = document.getElementById('rotate-btn');
+    const flipHBtn = document.getElementById('flip-h-btn');
+    const flipVBtn = document.getElementById('flip-v-btn');
+    const transformState = document.getElementById('transform-state');
+
+    rotateBtn.addEventListener('click', () => {
+        const next = (state.settings.rotation + 90) % 360;
+        updateSettings({ rotation: next });
+    });
+    flipHBtn.addEventListener('click', () => {
+        updateSettings({ flipH: !state.settings.flipH });
+    });
+    flipVBtn.addEventListener('click', () => {
+        updateSettings({ flipV: !state.settings.flipV });
+    });
+
     function syncUI() {
         formatSel.value = state.settings.type;
         qualityIn.value = Math.round(state.settings.quality * 100);
@@ -43,6 +66,10 @@ export function setupSettings() {
 
         qualityRow.hidden = isPng;
         qualityRow.classList.toggle('row-disabled', hasTarget);
+        const rot = state.settings.rotation || 0;
+        const h = state.settings.flipH ? ' · H' : '';
+        const v = state.settings.flipV ? ' · V' : '';
+        transformState.textContent = `${rot}°${h}${v}`;
     }
 
     subscribe(syncUI);
