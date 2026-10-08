@@ -5,6 +5,8 @@ import {setupFileList} from './filelist.js';
 import {setupSettings} from './settings.js';
 import {setupActions} from './action.js';
 import {state} from './state.js';
+import { setupPresets } from './presets.js';
+import { setupZipButton } from './zip.js';
 
 setupViews();
 setupTheme();
@@ -12,5 +14,7 @@ setupFileList();
 setupSettings();
 setupDropzone();
 setupActions();
+setupPresets();
+setupZipButton();
 
 console.log('I Love Files ready. State:', state);

@@ -48,6 +48,9 @@
                     <input type="file" id="file-input" accept="image/*" multiple hidden />
                 </div>
 
+                <div id="presets" class="presets"></div>
+
+
                 <section class="settings">
                     <div class="settings-row">
                         <label for="setting-format">Format</label>
@@ -67,11 +70,12 @@
 
                     <div class="settings-row">
                         <label for="setting-width">Max width (px · 0 = keep original)</label>
-                        <input type="number" id="setting-width" min="0" step="100" />
+                         <input type="number" id="setting-target-kb" min="0" step="10" placeholder="e.g. 500" />
                     </div>
                 </section>
 
                 <div class="actions-row">
+                     <button id="download-zip-btn" class="file-btn" type="button">Download all as ZIP</button>
                     <button id="convert-all-btn" class="file-btn file-btn-primary" type="button">
                         Convert all
                     </button>

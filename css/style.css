@@ -469,3 +469,52 @@ body {
     font-size: 0.85rem;
     color: var(--muted);
 }
+
+.presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.preset-btn {
+    padding: 0.45rem 0.9rem;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: transparent;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    margin: 0;
+}
+
+.preset-btn:hover {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.preset-btn.active {
+    background: var(--brand);
+    color: var(--ink);
+    border-color: var(--ink);
+}
+
+/* Dim the quality row when target size is active */
+.settings-row.row-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+/* Actions row holds two buttons now */
+.actions-row {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Rename .file-size to .file-meta to match filelist.js */
+.file-meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
