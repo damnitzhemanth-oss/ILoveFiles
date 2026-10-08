@@ -202,7 +202,7 @@ body {
     margin-top: 1.5rem;
 }
 
-/* ---------- MOBILE ---------- */
+
 
 @media (max-width: 480px) {
     #start-btn {
@@ -313,4 +313,159 @@ body {
     .file-name {
         font-size: 0.9rem;
     }
+}
+
+
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: var(--border) solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+
+#view-app:not(.has-files) .settings,
+#view-app:not(.has-files) .actions-row {
+    display: none;
+}
+
+.settings-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.settings-row label {
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin: 0;
+}
+
+.settings-row select,
+.settings-row input[type="number"] {
+    padding: 0.5rem 0.6rem;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+}
+
+.settings-row input[type="range"] {
+    width: 100%;
+    margin: 0;
+    accent-color: var(--brand);
+}
+
+#quality-value {
+    color: var(--brand);
+    font-weight: 600;
+}
+
+.actions-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+
+
+.file-actions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.file-btn {
+    padding: 0.35rem 0.7rem;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: transparent;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    cursor: pointer;
+    transition: transform 0.05s, background 0.15s, color 0.15s;
+    margin: 0;
+}
+
+.file-btn:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+.file-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.file-btn-primary {
+    background: var(--brand);
+    color: var(--ink);
+}
+
+.file-btn-primary:hover:not(:disabled) {
+    background: var(--brand-dark);
+    color: var(--ink);
+}
+
+.file-btn-danger {
+    color: var(--brand);
+    border-color: var(--brand);
+    padding: 0.35rem 0.6rem;
+}
+
+.file-btn-danger:hover:not(:disabled) {
+    background: var(--brand);
+    color: var(--ink);
+}
+
+
+
+.file-item[data-status="done"] {
+    border-color: var(--brand);
+}
+
+.file-item[data-status="error"] {
+    opacity: 0.9;
+}
+
+.file-item[data-status="error"] .file-meta {
+    color: var(--brand);
+}
+
+
+
+@media (max-width: 480px) {
+    .file-item {
+        flex-wrap: wrap;
+    }
+
+    .file-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .actions-row {
+        justify-content: stretch;
+    }
+
+    .actions-row .file-btn {
+        width: 100%;
+    }
+}
+
+.file-meta {
+    font-size: 0.85rem;
+    color: var(--muted);
 }

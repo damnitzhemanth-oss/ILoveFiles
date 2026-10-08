@@ -48,6 +48,35 @@
                     <input type="file" id="file-input" accept="image/*" multiple hidden />
                 </div>
 
+                <section class="settings">
+                    <div class="settings-row">
+                        <label for="setting-format">Format</label>
+                        <select id="setting-format">
+                            <option value="image/webp">WebP</option>
+                            <option value="image/jpeg">JPG</option>
+                            <option value="image/png">PNG</option>
+                        </select>
+                    </div>
+
+                    <div class="settings-row" id="quality-row">
+                        <label for="setting-quality">
+                            Quality <span id="quality-value">80</span>
+                        </label>
+                        <input type="range" id="setting-quality" min="10" max="100" step="5" />
+                    </div>
+
+                    <div class="settings-row">
+                        <label for="setting-width">Max width (px · 0 = keep original)</label>
+                        <input type="number" id="setting-width" min="0" step="100" />
+                    </div>
+                </section>
+
+                <div class="actions-row">
+                    <button id="convert-all-btn" class="file-btn file-btn-primary" type="button">
+                        Convert all
+                    </button>
+                </div>
+
                 <ul id="file-list" class="file-list"></ul>
                 <p id="empty-hint" class="muted">No files yet.</p>
             </section>
