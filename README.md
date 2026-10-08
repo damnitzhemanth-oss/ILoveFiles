@@ -17,7 +17,8 @@ URL : https://ilovefilesbyhemanth.netlify.app/
 
 Using canvas API it compresses your images to the desired quality using binary search.
 
-## Architecture
+## Architecture 
+This is generated using file structure commands.
 
 ```
  ILoveFiles
@@ -56,43 +57,30 @@ Using canvas API it compresses your images to the desired quality using binary s
 
 ## Privacy
 
-Files never leave your device. There is no server, no API, no analytics, no tracking.
+This website doesn't upload anything to cloud like other compression things does. it runs in browser but can be little less responsive. In return you get max privacy, not even a pixel leaves your device, btw runs on airplane mode if someone wants so.
 
 The only network requests the app makes:
 
-- **Google Fonts** — typography (Pixelify Sans, Press Start 2P)
-- **Pico.css CDN** — base styles
-- **JSZip CDN** — batch ZIP download, only loaded when you click "Download ZIP"
+- **Google Fonts** — for pixelify font (pixel text)
+- **Pico.css CDN** — lightweight and does the job 👍 
+- **JSZip CDN** — if you upload multiple files click zip button to download all them as a zip. 
 
 ## Installation
 
-### Use it as an app (no install required)
+### Use in browser 
 
-Just open the live URL. That's it. It works on desktop and mobile.
+Open : https://ilovefilesbyhemanth.netlify.app/ 
+and use it, copy images might not work on some browsers though.
 
 ### Install it as a PWA
 
- You can install it like a native app. It then launches from your desktop and is fully offline 
-
-**Chrome / Edge (desktop):**
-1. Open the live URL
-2. Look for the **install icon** in the address bar
-3. Click it → **Install**
-4. The app opens in its own window and appears in your Start menu / Applications folder
-
-**Android (Chrome):**
-1. Open the live URL
-2. Tap the **⋮** menu → **Add to Home screen** → **Install**
-3. The app icon appears on your home screen
-
-**iOS (Safari):**
-1. Open the live URL
-2. Tap the **Share** button (square with arrow)
-3. Scroll down → **Add to Home Screen** → **Add**
-
-Once installed, everything runs locally. Airplane mode works. And no snitches / trackers to see your cats picture!
+To actually install it as a app open the same URL but click install in PC browsers or install and create shortcut in mobile.
 
 
+Once installed, everything runs locally. Airplane mode works. And no one can see the shady things you do !
+
+## AI usage 
+Used AI for mainly debugging and assistance in CSS and JS. Didn't copy paste entire code.
 ## License
 
 MIT. Do whatever you want, but don't create a black hole out of it.
