@@ -692,3 +692,126 @@ body {
         gap: 0.5rem;
     }
 }
+
+.transform-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.transform-row .file-btn {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+}
+
+.transform-state {
+    margin-left: auto;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    color:var(--brand);
+    padding: 0.35rem 0.5rem;
+    border: 2px solid var(--brand);
+    min-width: 5rem;
+    text-align: center;
+}
+
+*:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+}
+
+.file-item:focus-visible {
+    outline-offset: 4px;
+}
+
+.dropzone:focus-visible {
+    background: rgba(255, 59,59,0.15);
+}
+
+@media (max-width : 480px) {
+    .file-btn {
+        min-height: 40px;
+        min-width: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+.file-name {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+}
+
+.file-meta {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+}
+
+.file-info {
+    overflow: visible;
+}
+
+
+
+.file-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+
+.file-actions .file-btn:not(.file-btn-primary):not(.file-btn-danger) {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.55rem;
+    opacity: 0.85;
+}
+
+.file-actions .file-btn:not(.file-btn-primary):not(.file-btn-danger):hover:not(:disabled) {
+    opacity: 1;
+}
+
+.file-actions .file-btn-danger {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .file-item {
+        flex-wrap: wrap;
+    }
+
+    .file-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 2px dashed var(--muted);
+    }
+}
+
+.heart-img {
+    display: inline-block;
+    height: 0.85em;
+    width: auto;
+    vertical-align: -0.08em;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    margin: 0 0.15em;
+}

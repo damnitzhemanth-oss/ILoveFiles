@@ -3,13 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ILoveFiles</title>
-        <meta name="description" content="Convert and Compress files locally" />
+        <title>I Love Files — Convert & compress locally</title>
+        <meta name="description" content="Convert and compress images in your browser. Nothing leaves your device." />
+
+        <link rel="icon" type="image/png" href="icons/favicon.png" />
+        <link rel="manifest" href="manifest.webmanifest" />
+        <meta name="theme-color" content="#ff3b3b" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
         <link rel="stylesheet" href="css/style.css" />
+
         <script>
           document.documentElement.dataset.theme =
             localStorage.getItem('theme') || 'light';
@@ -17,13 +23,27 @@
     </head>
 
     <body>
+        <script>
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('./sw.js').catch((err) =>
+                console.warn('SW registration failed:', err)
+              );
+            });
+          }
+        </script>
+
         <button id="theme-toggle" aria-label="Toggle theme">☀</button>
 
         <main class="container">
             <section id="view-home" class="view">
                 <hgroup>
-                    <h1>I Love Files</h1>
-                    <p>Convert and compress files locally. Nothing leaves your device</p>
+                    <h1>
+                        I
+                        <img src="icons/heart.png" class="heart-img" alt="love" />
+                        Files
+                    </h1>
+                    <p>Convert &amp; compress images locally. Nothing leaves your device.</p>
                 </hgroup>
 
                 <button id="start-btn" role="button">Start Converting</button>
@@ -42,20 +62,21 @@
                     <strong>I Love Files</strong>
                 </header>
 
-                <div id="dropzone" class="dropzone">
+                <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Drop images or press Enter to choose files">
                     <p>Drop images here or click to choose</p>
                     <p class="dropzone-hint">JPG · PNG · WebP · GIF</p>
+                    <p class="dropzone-hint">EXIF &amp; location data are removed automatically</p>
                     <input type="file" id="file-input" accept="image/*" multiple hidden />
                 </div>
 
                 <div id="presets" class="presets"></div>
-
 
                 <section class="settings">
                     <div class="settings-row">
                         <label for="setting-format">Format</label>
                         <select id="setting-format">
                             <option value="image/webp">WebP</option>
+                            <option value="image/avif" id="option-avif" hidden>AVIF</option>
                             <option value="image/jpeg">JPG</option>
                             <option value="image/png">PNG</option>
                         </select>
@@ -77,20 +98,31 @@
                         <label for="setting-target-kb">Max file size (KB · blank = use quality)</label>
                         <input type="number" id="setting-target-kb" min="0" step="10" placeholder="e.g. 500" />
                     </div>
+
+                    <div class="settings-row">
+                        <label>Rotate &amp; flip</label>
+                        <div class="transform-row">
+                            <button type="button" id="rotate-btn" class="file-btn" aria-label="Rotate 90 degrees">↻ 90°</button>
+                            <button type="button" id="flip-h-btn" class="file-btn" aria-label="Flip horizontally">⇄ H</button>
+                            <button type="button" id="flip-v-btn" class="file-btn" aria-label="Flip vertically">⇅ V</button>
+                            <span id="transform-state" class="transform-state">0°</span>
+                        </div>
+                    </div>
                 </section>
 
                 <div class="actions-row">
                     <button id="clear-all-btn" class="file-btn file-btn-danger" type="button">Clear all</button>
                     <span class="actions-spacer"></span>
-                    <button id="download-zip-btn" class="file-btn" type="button">Download all as ZIP</button>
+                    <button id="download-zip-btn" class="file-btn" type="button">Download ZIP</button>
                     <button id="convert-all-btn" class="file-btn file-btn-primary" type="button">
-                    convert all <kbd class="kbd-hint">Ctrl↵</kbd>
+                        Convert all <kbd class="kbd-hint">Ctrl↵</kbd>
                     </button>
                 </div>
 
-                <p id="convert-status" class="convert-status"></p>
+                <p id="convert-status" class="convert-status" role="status" aria-live="polite"></p>
 
-                <ul id="file-list" class="file-list"></ul>
+                <ul id="file-list" class="file-list" role="list" aria-label="Files to convert"></ul>
+
                 <div id="empty-hint" class="empty-state">
                     <p class="empty-title">No files yet</p>
                     <p class="empty-body">
@@ -101,10 +133,7 @@
             </section>
         </main>
 
-        <script type="module" src="js/main.js"></script>
-    </body>
-
-            <div id="compare-modal" class="compare-modal" hidden>
+        <div id="compare-modal" class="compare-modal" hidden>
             <div class="compare-panel">
                 <header class="compare-header">
                     <strong id="compare-name">Comparing</strong>
@@ -121,5 +150,7 @@
                 <p class="compare-hint">Drag to compare · Original left · Converted right</p>
             </div>
         </div>
-        
+
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>

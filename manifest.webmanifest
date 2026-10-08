@@ -1,0 +1,19 @@
+{
+    "name": "I Love Files",
+    "short_name": "ILoveFiles",
+    "description": "Convert and compress your files locally. Nothing leaves your device.",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#f5f0e6",
+    "theme_color": "#ff3b3b",
+    "icons": [
+        {
+            "src": "icons/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
