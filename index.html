@@ -80,14 +80,24 @@
                 </section>
 
                 <div class="actions-row">
-                     <button id="download-zip-btn" class="file-btn" type="button">Download all as ZIP</button>
+                    <button id="clear-all-btn" class="file-btn file-btn-danger" type="button">Clear all</button>
+                    <span class="actions-spacer"></span>
+                    <button id="download-zip-btn" class="file-btn" type="button">Download all as ZIP</button>
                     <button id="convert-all-btn" class="file-btn file-btn-primary" type="button">
-                        Convert all
+                    convert all <kbd class="kbd-hint">Ctrl↵</kbd>
                     </button>
                 </div>
 
+                <p id="convert-status" class="convert-status"></p>
+
                 <ul id="file-list" class="file-list"></ul>
-                <p id="empty-hint" class="muted">No files yet.</p>
+                <div id="empty-hint" class="empty-state">
+                    <p class="empty-title">No files yet</p>
+                    <p class="empty-body">
+                        Drop images above, or click the box to browse.<br>
+                        Everything happens in your browser — nothing is uploaded.
+                    </p>
+                </div>
             </section>
         </main>
 

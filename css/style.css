@@ -513,3 +513,78 @@ body {
     font-size: 0.85rem;
     color: var(--muted);
 }
+
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border: 2px dashed var(--muted);
+    margin-top: 1.5rem;
+    opacity: 0.85;
+}
+
+.empty-state[hidden] {
+    display: none;
+}
+
+.empty-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    color: var(--brand);
+    margin: 0 0 1rem 0;
+}
+
+.empty-body {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+.actions-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.actions-spacer {
+    flex: 1;
+}
+
+.convert-status {
+    margin-top: 0.75rem;
+    min-height: 1.2em;
+    font-size: 0.95rem;
+    color: var(--brand);
+    text-align: right;
+}
+
+.kbd-hint {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.35rem;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid currentColor;
+    opacity: 0.75;
+}
+
+[data-theme="dark"] .kbd-hint {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 480px) {
+    .actions-spacer {
+        display: none;
+    }
+
+    .actions-row .file-btn {
+        width: 100%;
+    }
+
+    .convert-status {
+        text-align: center;
+    }
+}
