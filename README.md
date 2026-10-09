@@ -59,11 +59,7 @@ This is generated using file structure commands.
 
 This website doesn't upload anything to cloud like other compression things does. it runs in browser but can be little less responsive. In return you get max privacy, not even a pixel leaves your device, btw runs on airplane mode if someone wants so.
 
-The only network requests the app makes:
-
-- **Google Fonts** — for pixelify font (pixel text)
-- **Pico.css CDN** — lightweight and does the job 👍 
-- **JSZip CDN** — if you upload multiple files click zip button to download all them as a zip. 
+And this does not make any network requests as even Pico (css), Zip
 
 ## Installation
 

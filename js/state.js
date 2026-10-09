@@ -1,3 +1,5 @@
+import { generateThumbnail } from "./thumbnail.js";
+
 export const state = {
     files: [],
     settings: {
@@ -17,17 +19,19 @@ const listeners =new Set();
 export function subscribe(fn) {listeners.add(fn);}
 export function notify() {listeners.forEach((fn) => fn());}
 
-export function addFiles(newFiles) {
+export async function addFiles(newFiles) {
     for (const file of newFiles) {
+        const id = nextId++;
+        
         state.files.push({
-            id: nextId++,
+            id,
             file,
             name: file.name,
             size: file.size,
             type: file.type,
-            thumbnailUrl: URL.createObjectURL(file),
+            thumbnailUrl: null,
 
-            status:'idle',
+            status: 'idle',
             outputBlob: null,
             outputUrl: null,
             outputName: null,
@@ -35,7 +39,22 @@ export function addFiles(newFiles) {
             outputWidth: null,
             outputHeight: null,
             error: null,
+        });
 
+        
+        generateThumbnail(file).then((thumbBlob) => {
+            if (!thumbBlob) return;
+            const entry = state.files.find((f) => f.id === id);
+            if (!entry) return;
+            entry.thumbnailUrl = URL.createObjectURL(thumbBlob);
+            notify();
+        }).catch(() => {
+            
+            const entry = state.files.find((f) => f.id === id);
+            if (entry && !entry.thumbnailUrl) {
+                entry.thumbnailUrl = URL.createObjectURL(file);
+                notify();
+            }
         });
     }
     notify();

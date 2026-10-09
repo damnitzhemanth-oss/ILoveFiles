@@ -1,7 +1,9 @@
-const CACHE = 'ilovefiles-v2';
+const CACHE = 'ilovefiles-v4';
 const ASSETS = [
     './',
     './index.html',
+    './css/pico.min.css',
+    './css/fonts.css',
     './css/style.css',
     './js/main.js',
     './js/state.js',
@@ -20,6 +22,11 @@ const ASSETS = [
     './js/zip.js',
     './js/loader.js',
     './js/format-support.js',
+    './js/thumbnail.js',
+    './js/vendor/jszip.min.js',
+    './fonts/pixelify-sans-v3-latin-regular.woff2',
+    './fonts/pixelify-sans-v3-latin-600.woff2',
+    './fonts/press-start-2p-v16-latin-regular.woff2',
     './icons/favicon.png',
     './icons/heart.png',
     './manifest.webmanifest'

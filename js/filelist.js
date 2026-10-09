@@ -8,7 +8,7 @@ const listEl  = () => document.getElementById('file-list');
 const emptyEl = () => document.getElementById('empty-hint');
 const appEl   = () => document.getElementById('view-app');
 
-const itemEls = new Map(); // id -> <li>
+const itemEls = new Map();
 
 export function renderFileList() {
     const list = listEl();
@@ -29,7 +29,7 @@ export function renderFileList() {
     const seen = new Set();
     const currentIds = state.files.map((f) => f.id);
 
-    // Add or update items in state order
+   
     let lastNode = null;
     for (const entry of state.files) {
         seen.add(entry.id);
@@ -42,7 +42,7 @@ export function renderFileList() {
             updateItem(li, entry);
         }
 
-        // Ensure DOM order matches state order
+        
         const expectedNext = lastNode ? lastNode.nextSibling : list.firstChild;
         if (expectedNext !== li) {
             list.insertBefore(li, expectedNext || null);
@@ -50,7 +50,7 @@ export function renderFileList() {
         lastNode = li;
     }
 
-    // Remove items no longer in state
+   
     for (const [id, li] of itemEls) {
         if (!seen.has(id)) {
             li.remove();
@@ -61,6 +61,10 @@ export function renderFileList() {
 
 function updateItem(li, entry) {
     li.dataset.status = entry.status || 'idle';
+    const thumb = li.querySelector('.file-thumb');
+    if (thumb && !thumb.src && entry.thumbnailUrl) {
+        thumb.src = entry.thumbnailUrl;
+    }
     const meta = li.querySelector('.file-meta');
     if (meta) meta.textContent = buildMetaText(entry);
 
@@ -70,7 +74,7 @@ function updateItem(li, entry) {
         actions.append(...buildActions(entry));
     }
 
-    // Re-bind keyboard handler for Enter → convert
+   
     li.onkeydown = makeKeyHandler(li, entry);
 }
 
@@ -109,8 +113,9 @@ function buildItem(entry) {
 
     const thumb = document.createElement('img');
     thumb.className = 'file-thumb';
-    thumb.src = entry.thumbnailUrl;
     thumb.alt = '';
+    thumb.loading = 'lazy';
+    if (entry.thumbnailUrl) thumb.src = entry.thumbnailUrl;
 
     const info = document.createElement('div');
     info.className = 'file-info';

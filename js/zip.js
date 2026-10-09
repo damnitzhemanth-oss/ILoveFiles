@@ -1,4 +1,4 @@
-import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+const JSZip = window.JSZip;
 import {state} from './state.js';
 import {downloadBlob} from './downloader.js';
 
