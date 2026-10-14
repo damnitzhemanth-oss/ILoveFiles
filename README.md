@@ -65,6 +65,7 @@ And this does not make any network requests as even Pico (css), Zip
 
 ### Use in browser 
 *You can Run this directly in your browser*
+
 Open : https://ilovefilesbyhemanth.netlify.app/ 
 and use it, copy images might not work on some browsers though.
 
