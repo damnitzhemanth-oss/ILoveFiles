@@ -64,16 +64,22 @@ And this does not make any network requests as even Pico (css), Zip
 ## Installation
 
 ### Use in browser 
-
+*You can Run this directly in your browser*
 Open : https://ilovefilesbyhemanth.netlify.app/ 
 and use it, copy images might not work on some browsers though.
 
-### Install it as a PWA
+### Installation for Computer users.
 
-To actually install it as a app open the same URL but click install in PC browsers or install and create shortcut in mobile.
+Open the URL https://ilovefilesbyhemanth.netlify.app/ 
 
+and click ctrl + s to save it. That's it. Now you can run it without any internet 
 
-Once installed, everything runs locally. Airplane mode works. And no one can see the shady things you do !
+### Installation for Mobile users.
+
+Open the URL
+https://ilovefilesbyhemanth.netlify.app/ 
+
+and click on the three dots on top right corner and press "Install and create shortcut". If not available in google, open this link in Chrome.
 
 ## AI usage 
 Used AI for mainly debugging and assistance in CSS and JS. Didn't copy paste entire code.
