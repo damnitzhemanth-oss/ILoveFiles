@@ -69,11 +69,44 @@ And this does not make any network requests as even Pico (css), Zip
 Open : https://ilovefilesbyhemanth.netlify.app/ 
 and use it, copy images might not work on some browsers though.
 
-### Installation for Computer users.
+### Installation for Windows/MacOs/Linux
 
-Open the URL https://ilovefilesbyhemanth.netlify.app/ 
+Step 1: Download this GitHub repo as Zip.
+    You can also clone the repo.
 
-and click ctrl + s to save it. That's it. Now you can run it without any internet 
+Step 2 : Extract the zip file.
+
+Step 3 : Open the folder in VS Code and right click the "index.html" and press open with live server (must install live server extension).
+
+Step 4 : If VS code is not available, manually navigate to ilovefiles folder in CMD by using cd commands.
+Example : **Assuming you installed ilovefiles and extracted zip in C:/Documents**
+```
+##Type this in terminal
+
+cd C:/Documents/ilovefiles
+```
+
+Step 5: Once in the folder run the following command (python must installed)
+
+```
+python -m http.server 8000
+```
+
+or
+
+```
+python3 -m http.server 8000
+```
+
+Step 6: Open the live server by pasting the following URL in your browser.
+
+```
+http://localhost:8000
+```
+
+**Note: Don't run individual files like index.html as buttons and themes which depended on CSS,JS will not run,  if these steps feels heavy use the website in web**
+
+
 
 ### Installation for Mobile users.
 
