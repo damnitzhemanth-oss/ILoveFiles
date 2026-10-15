@@ -73,6 +73,9 @@ and use it, copy images might not work on some browsers though.
 
 Step 1: Download this GitHub repo as Zip.
     You can also clone the repo.
+```
+git clone "https://github.com/damnitzhemanth-oss/ILoveFiles"
+```
 
 Step 2 : Extract the zip file.
 
@@ -80,9 +83,7 @@ Step 3 : Open the folder in VS Code and right click the "index.html" and press o
 
 Step 4 : If VS code is not available, manually navigate to ilovefiles folder in CMD by using cd commands.
 Example : **Assuming you installed ilovefiles and extracted zip in C:/Documents**
-```
-##Type this in terminal
-
+``` 
 cd C:/Documents/ilovefiles
 ```
 
